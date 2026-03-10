@@ -57,34 +57,64 @@ LETTER (a|b|c|...|z|A|B|C|...|Z);
 - Python 3.6+
 - No external dependencies
 
-## Example
+## Examples
 
-**Input:**
+### Syntax Error Example
+
+**Input (invalid regex syntax):**
 ```
-DIGIT (0|1|2|3|4|5|6|7|8|9);
-LETTER (a|b|c|d|e);
+t1 (a)|(b);
+t2 (a).((a)*);
+t3 (((a)|b)*).(c);
 #
-"abc123def"
+"aabac"
 ```
 
 **Output:**
 ```
-LETTER, "a"
-LETTER, "b"
-LETTER, "c"
-DIGIT, "1"
-DIGIT, "2"
-DIGIT, "3"
-DIGIT, "d"
-LETTER, "e"
-LETTER, "f"
+t3 has a syntax error in its expression.
+```
+
+### Semantic Error Example
+
+**Input (duplicate token declaration):**
+```
+t1 (a)|(b);
+t1 (a).((a)*);
+t2 (((a)|(b))*).(c);
+#
+"ababc"
+```
+
+**Output:**
+```
+Line 2: t1 already declared on line 1
+```
+
+### Successful Lexical Analysis
+
+**Input (valid tokens and input):**
+```
+t1 (a)|(b);
+t2 (a).((a)*);
+t3 (((a)|(b))*).(c);
+#
+"baaac"
+```
+
+**Output:**
+```
+t1, "b"
+t2, "aa"
+t3, "ac"
+
 ```
 
 ## Error Handling
 
-- **SYNTAX ERROR** — Invalid expression syntax
-- **Semantic Errors** — Duplicate token declarations
-- **Epsilon Errors** — Tokens that generate epsilon (invalid in lexical analysis)
+- **SYNTAX ERROR** — Invalid expression syntax (mismatched parentheses, invalid operators)
+- **Duplicate Token Declarations** — Same token name defined multiple times
+- **Epsilon Errors** — Tokens that generate epsilon (empty string) are invalid for lexical analysis
 
 ## License
 
