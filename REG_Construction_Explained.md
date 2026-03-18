@@ -43,7 +43,7 @@ Two nodes are created: **N0** (start) and **N1** (accept).
 
 **REG_0** = `{ start: N0, accept: N1 }`
 
-![Step 1 — create_REG_char('0')](/Users/surajchannappanavar/Desktop/S26_CSE340_P1/images/step1_char_0.png)
+![Step 1 — create_REG_char('0')](step1_char_0.png)
 
 ---
 
