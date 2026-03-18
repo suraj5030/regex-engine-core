@@ -53,7 +53,7 @@ Two more nodes: **N2** (start) and **N3** (accept).
 
 **REG_1** = `{ start: N2, accept: N3 }`
 
-![Step 2 — create_REG_char('1')](images/step2_char_1.png)
+![Step 2 — create_REG_char('1')](step2_char_1.png)
 
 ---
 
@@ -69,7 +69,7 @@ Edges added:
 
 **REG_OR** = `{ start: N4, accept: N5 }`
 
-![Step 3 — OR_REGS](images/step3_or.png)
+![Step 3 — OR_REGS](step3_or.png)
 
 ---
 
@@ -85,13 +85,13 @@ Edges added:
 
 **REG_STAR** = `{ start: N6, accept: N7 }` — this is the final NFA.
 
-![Step 4 — kleene_star_REG](images/step4_star.png)
+![Step 4 — kleene_star_REG](step4_star.png)
 
 ---
 
 ## Complete NFA
 
-![Final NFA for ((0)|(1))*](images/final_nfa.png)
+![Final NFA for ((0)|(1))*](final_nfa.png)
 
 ---
 
