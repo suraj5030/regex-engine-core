@@ -95,10 +95,6 @@ Edges added:
 
 ---
 
-## Summary Table
-
-### All 8 Nodes
-
 | Node | Created By | Role |
 |------|------------|------|
 | N0 | `create_REG_char('0')` | Start of `0` sub-NFA |
@@ -110,32 +106,3 @@ Edges added:
 | N6 | `kleene_star_REG` | **Final start** of `(0\|1)*` |
 | N7 | `kleene_star_REG` | **Final accept** of `(0\|1)*` |
 
-### All 10 Edges
-
-| From | Label | To | Created By |
-|------|-------|----|------------|
-| N0 | `'0'` | N1 | `create_REG_char('0')` |
-| N2 | `'1'` | N3 | `create_REG_char('1')` |
-| N4 | ε | N0 | `OR_REGS` — first_neighbor |
-| N4 | ε | N2 | `OR_REGS` — second_neighbor |
-| N1 | ε | N5 | `OR_REGS` — reg1.accept → outer_accept |
-| N3 | ε | N5 | `OR_REGS` — reg2.accept → outer_accept |
-| N6 | ε | N4 | `kleene_star_REG` — enter loop |
-| N6 | ε | N7 | `kleene_star_REG` — skip (accept ε) |
-| N5 | ε | N4 | `kleene_star_REG` — loop back |
-| N5 | ε | N7 | `kleene_star_REG` — exit loop |
-
----
-
-## What Strings Does This Accept?
-
-The language is **{0, 1}\*** — all binary strings including the empty string.
-
-| Input | Accepted? | Path Through NFA |
-|-------|-----------|-------------------|
-| ε (empty) | ✅ | N6 →ε→ N7 |
-| `"0"` | ✅ | N6 →ε→ N4 →ε→ N0 →'0'→ N1 →ε→ N5 →ε→ N7 |
-| `"1"` | ✅ | N6 →ε→ N4 →ε→ N2 →'1'→ N3 →ε→ N5 →ε→ N7 |
-| `"01"` | ✅ | N6 →ε→ N4 →ε→ N0 →'0'→ N1 →ε→ N5 →ε→ N4 →ε→ N2 →'1'→ N3 →ε→ N5 →ε→ N7 |
-| `"110"` | ✅ | Loop twice through `1`-branch, once through `0`-branch |
-| `"a"` | ❌ | No edge labeled `'a'` exists |
